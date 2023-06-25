@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <article>
+        <section>
+        <!-- canvas -->
+        <div class="guicontent"></div>
+        </section>
+
+        <!-- controls -->
+        <section>
+        [Audio]
+        <input type="file" name="audiofile" id="file-btn" accept=".mp3,.m4a,.aac,.wav,.flac" multiple/>
+        <button id="play-btn" >PLAY</button>
+        <button id="stop-btn">STOP</button>
+        </section>
+
+        <section>
+        [Param]
+            <button id="save-btn" >SAVE</button>
+            <input name="loadfile" type="file" id="load-btn"/>
+        </section>
+
+        <!-- edit test
+        <section>
+        <label for="name">Edit:</label>
+            <input type="text" id="edit" name="name" required minlength="4" maxlength="8" size="10">
+        </section>
+         -->
+
+        <section>
+            <!-- log -->
+            log:<br>
+            <textarea id="log" name="log" rows="16" cols="64">...</textarea>
+        </section>
+    </article>
+        <!-- javascript -->
+        <script src="./js/audio-parts.js"></script>
+        <script src="./js/jsasp-parts.json.js"></script>
+        <script src="./js/gui-parts.json.js"></script>
+        <script src="./js/gui-parts.js"></script>
+        <script src="./js/main.js"></script>
+        <noscript>Javascript unavilable</noscript>
+</body>
+
+</html>
