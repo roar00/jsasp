@@ -138,7 +138,12 @@ async function audioInputMicSetup() {
 
     if (navigator.getUserMedia) {
         await navigator.mediaDevices
-        .getUserMedia({ audio: true, video: true })
+        .getUserMedia({
+            audio: {
+                autoGainControl: false,
+                echoCancellation: false,
+                noiseSuppression: false
+                }, video: true })
         .then((stream) => {
            audioSourceNode = new MediaStreamAudioSourceNode(audioCtx, {
             mediaStream: stream,
