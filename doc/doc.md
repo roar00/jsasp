@@ -73,6 +73,7 @@ Arbitrary signal processing and parameters can be added by changing jsasp-proces
     - The simplest way is to send the parameters with the command.  
       - Send command by clicking Command in GUI  
       <img width="50" src="./txt.png">
+
       ~~~
       PUT gainFor44k 0.75  
       GET gainFor48k (The current value will display on log view.)
