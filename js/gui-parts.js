@@ -42,7 +42,7 @@ class canvasGui {
         this.valMax = 1.0;
         this.valCalc = 0.0;
 
-        this.valLabel  = ['Disable', 'OK'];
+        this.valLabel  = ['None'];
         this.valObj = 0.0;
 
         // refer to json parameters
@@ -226,6 +226,9 @@ class canvasGui_text extends canvasGui {
         super(o);
         if(typeof o['valPrompt'] !== "undefined") {
             this.prompt = o['valPrompt'];
+        }
+        else {
+            this.prompt = 'None';
         }
         this.view();
     }

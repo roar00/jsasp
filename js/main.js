@@ -186,6 +186,10 @@ function jsaspSetParam(num)
         if(params[0] === 'GET') {
             jsaspMsg(data);
         }
+        if(params[0] === 'PUT') {
+            jsaspMsg(data);
+            jsaspLog('(Note: GUIs do not move along with this) PUT: '+ params[1] + '-> ' + params[2]);
+        }
         jsaspGuiObj[num].setValue('None');
     }
     if(num === 1) {

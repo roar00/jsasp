@@ -22,7 +22,7 @@ const jsaspGuiData = [
         'offsetX' : 0,
         'offsetY' : 0,
         'valLabel': ['None'],
-        'valPrompt': ['Command? (reset/GET [param name])'],
+        'valPrompt': ['Command? (reset/GET [param]/PUT [param] [value])'],
     },
     {  // num = 1
         'type' : 'nob',
