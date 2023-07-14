@@ -265,6 +265,7 @@ class canvasGui_text extends canvasGui {
             // Do nothing when directClicked
             return;
         }
+        // Note: Electron cannot treat prompt correctly.
         let text = prompt(this.prompt, this.valLabel);
         if(text === null) {
             text = this.valLabel;

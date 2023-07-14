@@ -29,7 +29,7 @@ var audioInfo = {
     jsaspBufOut1: 0,
     jsaspBufTest: 0
 };
-
+var latestMessage = 'none'
 
 var freqData = new Float32Array(100);
 var formCount = 0;
@@ -90,6 +90,7 @@ function formView() {
                     jsaspGuiObj[i].view();
                 }
             }
+            pollingCheck();
         }
         else {
             for (let i = jsaspGuiObj.length - 1; i >= 0; i--) {
@@ -239,10 +240,7 @@ async function audioOutputSetup() {
             audioInfo = data;
         }
         else {
-            let txt = data.messageCaption
-            txt += ' -> ';
-            txt += JSON.stringify(data);
-            jsaspLog(txt);
+            latestMessage = data;
         }
     };
     isAudioProcessReady = true;

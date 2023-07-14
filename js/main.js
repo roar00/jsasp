@@ -88,7 +88,7 @@ document.getElementById('save-btn').addEventListener('click', () => {
 });
 
 /**
- * addEventListener:click (load-btn)
+ * addEventListener:change (load-btn)
  * @brief audio file setup and start
  * @param
  * @return
@@ -103,6 +103,29 @@ loadfile.addEventListener( 'change', function(e) {
       const jsaspGuiDataNew = JSON.parse(reader.result);
       createCanvasGuis(jsaspGuiDataNew);
     });
+});
+
+/**
+ * addEventListener:click (edit-btn)
+ * @brief command send with edit value
+ * @param
+ * @return
+ */
+var getLogLock = false;
+document.getElementById('edit-btn').addEventListener( 'click', () => {
+    let element = document.getElementById('edit');
+    let params = element.value.split(' ');
+    if(params[0] === 'RESET' || params[0] === 'reset') {
+        createCanvasGuis(jsaspGuiData);
+    }
+    if(params[0] === 'GET') {
+        jsaspMsg(element.value);
+        getLogLock = true;
+    }
+    if(params[0] === 'PUT') {
+        jsaspMsg(element.value);
+        jsaspLog('Note: GUI no effect -> ' + element.value);
+    }
 });
 
 /**
@@ -185,10 +208,11 @@ function jsaspSetParam(num)
         }
         if(params[0] === 'GET') {
             jsaspMsg(data);
+            getLogLock = true;
         }
         if(params[0] === 'PUT') {
             jsaspMsg(data);
-            jsaspLog('(Note: GUIs do not move along with this) PUT: '+ params[1] + '-> ' + params[2]);
+            jsaspLog('Note: GUI no effect :' + data);
         }
         jsaspGuiObj[num].setValue('None');
     }
@@ -229,5 +253,25 @@ function jsaspSetParam(num)
     if(num === 7) {
         let distortion = jsaspGuiObj[num].getCalcValue();
         jsaspMsg('PUT distortion', distortion);
+    }
+}
+
+/**
+ * pollingCheck
+ * @brief polling check while audio interval loop
+ * @param
+ * @return
+ */
+function pollingCheck()
+{
+    if(getLogLock === true) {
+        let txt = latestMessage.messageCaption;
+        txt += ' -> ';
+        txt += JSON.stringify(latestMessage);
+        jsaspLog(txt);
+        getLogLock = false;
+    }
+    else {
+        /* something polling test */
     }
 }

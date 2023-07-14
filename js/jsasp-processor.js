@@ -210,8 +210,9 @@ class JsaspProcessor extends AudioWorkletProcessor {
         }
         else if(this.param.inmode == 1.0) {
             // OSC
+            let oscbase = Math.PI * 2.0 * this.param.freq / parseFloat(this.info.fs);
             for (let i = 0; i < this.info.samplecount; ++i) {
-                let audiodata = Math.sin(Math.PI * 2 * this.param.freq * (this.info.sineCount + i) / 48000) * this.param.ingain;
+                let audiodata = Math.sin(oscbase * (this.info.sineCount + i)) * this.param.ingain;
                 ch0[i] = audiodata;
                 ch1[i] = audiodata;
                 inputdata0 = Math.max(inputdata0, Math.abs(ch0[i]));
@@ -225,7 +226,7 @@ class JsaspProcessor extends AudioWorkletProcessor {
         else if(this.param.inmode == 2.0) {
             // Noise
             for (let i = 0; i < this.info.samplecount; ++i) {
-                let audiodata = (Math.random() * 2 - 1)  * this.param.ingain;
+                let audiodata = (Math.random() * 2.0 - 1.0)  * this.param.ingain;
                 ch0[i] = audiodata;
                 ch1[i] = audiodata;
                 inputdata0 = Math.max(inputdata0, Math.abs(ch0[i]));
@@ -241,11 +242,11 @@ class JsaspProcessor extends AudioWorkletProcessor {
             for (let i = 0; i < this.info.samplecount; ++i) {
                 ch0[i] = 0.0;
                 ch1[i] = 0.0;
-                inputdata0 = Math.max(inputdata0, Math.abs(ch0[i]));
-                inputdata1 = Math.max(inputdata1, Math.abs(ch1[i]));
+                inputdata0 = 0.0;
+                inputdata1 = 0.0;
                 if(this.info.jsaspBufIn0.length > i) {
-                    this.info.jsaspBufIn0[i] = ch0[i];
-                    this.info.jsaspBufIn1[i] = ch1[i];
+                    this.info.jsaspBufIn0[i] = 0.0;
+                    this.info.jsaspBufIn1[i] = 0.0;
                 }
             }
         }
@@ -265,8 +266,9 @@ class JsaspProcessor extends AudioWorkletProcessor {
         }
         else if(this.param.outmode == 1.0) {
             // OSC
+            let oscbase = Math.PI * 2.0 * this.param.freq / parseFloat(this.info.fs);
             for (let i = 0; i < this.info.samplecount; ++i) {
-                let audiodata = Math.sin(Math.PI * 2 * this.param.freq * (this.info.sineCount + i) / 48000) * this.param.outgain;
+                let audiodata = Math.sin(oscbase * (this.info.sineCount + i)) * this.param.outgain;
                 ch0[i] = audiodata;
                 ch1[i] = audiodata;
             }
@@ -274,7 +276,7 @@ class JsaspProcessor extends AudioWorkletProcessor {
         else if(this.param.outmode == 2.0) {
             // Noise
             for (let i = 0; i < this.info.samplecount; ++i) {
-                let audiodata = (Math.random() * 2 - 1)  * this.param.outgain;
+                let audiodata = (Math.random() * 2.0 - 1.0)  * this.param.outgain;
                 ch0[i] = audiodata;
                 ch1[i] = audiodata;
             }
